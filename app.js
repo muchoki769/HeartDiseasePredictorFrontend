@@ -13,7 +13,7 @@ class HeartDiseasePredictor {
         console.log(' Heart Disease Predictor Initializing...');
         this.initializeEventListeners();
         this.testConnection();
-        this.loadSampleData();
+        // this.loadSampleData();
     }
 
     initializeEventListeners() {
@@ -29,22 +29,22 @@ class HeartDiseasePredictor {
             console.error(' API Connection failed');
         }
     }
-    loadSampleData() {
-        // Pre-fill with sample data for testing
-        document.getElementById('age').value = 52;
-        document.getElementById('sex').value = '1';
-        document.getElementById('cp').value = '2';
-        document.getElementById('trestbps').value = 128;
-        document.getElementById('chol').value = 205;
-        document.getElementById('fbs').value = '1';
-        document.getElementById('restecg').value = '1';
-        document.getElementById('thalach').value = 142;
-        document.getElementById('exang').value = '0';
-        document.getElementById('oldpeak').value = '1.2';
-        document.getElementById('slope').value = '2';
-        document.getElementById('ca').value = '0';
-        document.getElementById('thal').value = '2';
-    }
+    // loadSampleData() {
+    //     // Pre-fill with sample data for testing
+    //     document.getElementById('age').value = 52;
+    //     document.getElementById('sex').value = '1';
+    //     document.getElementById('cp').value = '2';
+    //     document.getElementById('trestbps').value = 128;
+    //     document.getElementById('chol').value = 205;
+    //     document.getElementById('fbs').value = '1';
+    //     document.getElementById('restecg').value = '1';
+    //     document.getElementById('thalach').value = 142;
+    //     document.getElementById('exang').value = '0';
+    //     document.getElementById('oldpeak').value = '1.2';
+    //     document.getElementById('slope').value = '2';
+    //     document.getElementById('ca').value = '0';
+    //     document.getElementById('thal').value = '2';
+    // }
       async testConnection() {
         try {
             const response = await fetch(`${this.apiBaseUrl}/health`);
