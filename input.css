@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .risk-low { 
+    background-color: #10b981; 
+    border-color: #10b981;
+  }
+  
+  .risk-medium { 
+    background-color: #f59e0b; 
+    border-color: #f59e0b;
+  }
+  
+  .risk-high { 
+    background-color: #ef4444; 
+    border-color: #ef4444;
+  }
+  
+  .pulse-ring {
+    animation: pulse 2s infinite;
+  }
+}

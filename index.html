@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Predictor | AI for SDG 3</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+         <link href="./styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+         }
+        .risk-low { background-color: #10b981; }
+        .risk-medium { background-color: #f59e0b; }
+        .risk-high { background-color: #ef4444; }
+        .pulse-ring {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+    </style> 
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-heart-pulse text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">Heart Disease Risk Predictor</h1>
+                        <p class="text-blue-100">AI for Sustainable Development Goal 3</p>
+                    </div>
+                </div>
+                <div class="bg-white/20 rounded-lg px-4 py-2">
+                    <span class="font-semibold">SDG 3: Good Health & Well-being</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Input Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-user-md mr-3 text-blue-500"></i>
+                        Patient Health Assessment
+                    </h2>
+                    
+                    <form id="predictionForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Demographic Information -->
+                        <div class="md:col-span-2">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+                                Demographic Information
+                            </h3>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Age (years)
+                            </label>
+                            <input type="number" id="age" name="age" min="20" max="100" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Sex
+                            </label>
+                            <select id="sex" name="sex" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select...</option>
+                                <option value="0">Female</option>
+                                <option value="1">Male</option>
+                            </select>
+                        </div>
+
+                        <!-- Medical History -->
+                        <div class="md:col-span-2 mt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+                                Medical History & Symptoms
+                            </h3>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Chest Pain Type
+                            </label>
+                            <select id="cp" name="cp" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select type...</option>
+                                <option value="0">Typical Angina</option>
+                                <option value="1">Atypical Angina</option>
+                                <option value="2">Non-anginal Pain</option>
+                                <option value="3">Asymptomatic</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Resting Blood Pressure (mm Hg)
+                            </label>
+                            <input type="number" id="trestbps" name="trestbps" min="90" max="200" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Cholesterol (mg/dL)
+                            </label>
+                            <input type="number" id="chol" name="chol" min="100" max="600" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Fasting Blood Sugar > 120 mg/dL
+                            </label>
+                            <select id="fbs" name="fbs" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select...</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                        <!-- Exercise & ECG -->
+                        <div class="md:col-span-2 mt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+                                Exercise & ECG Results
+                            </h3>
+                        </div>
+
+                        <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Resting ECG</label>
+                        <select id="restecg" name="restecg" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">Select...</option>
+                            <option value="0">Normal</option>
+                            <option value="1" selected>ST-T wave abnormality</option>
+                            <option value="2">Left ventricular hypertrophy</option>
+                        </select>
+                    </div>   
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Max Heart Rate Achieved
+                            </label>
+                            <input type="number" id="thalach" name="thalach" min="60" max="220" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Exercise Induced Angina
+                            </label>
+                            <select id="exang" name="exang" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select...</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                ST Depression (oldpeak)
+                            </label>
+                            <input type="number" id="oldpeak" name="oldpeak" min="0" max="6.2" step="0.1" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                ST Slope
+                            </label>
+                            <select id="slope" name="slope" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select...</option>
+                                <option value="0">Upsloping</option>
+                                <option value="1">Flat</option>
+                                <option value="2">Downsloping</option>
+                            </select>
+                        </div>
+
+                        <!-- Advanced Parameters -->
+                        <div class="md:col-span-2 mt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
+                                Advanced Parameters
+                            </h3>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Number of Major Vessels
+                            </label>
+                            <select id="ca" name="ca" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select...</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Thalassemia
+                            </label>
+                            <select id="thal" name="thal" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                                <option value="">Select...</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Fixed Defect</option>
+                                <option value="3">Reversible Defect</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="md:col-span-2 mt-6">
+                            <button type="submit" 
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                                <i class="fas fa-brain mr-2"></i>
+                                Analyze Heart Disease Risk
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="lg:col-span-1">
+                <div id="resultsPanel" class="bg-white rounded-lg shadow-lg p-6 sticky top-4 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-chart-line mr-3 text-green-500"></i>
+                        Risk Assessment
+                    </h2>
+
+                    <!-- Risk Indicator -->
+                    <div id="riskIndicator" class="text-center mb-6">
+                        <div id="riskMeter" class="relative inline-block">
+                            <div class="w-32 h-32 rounded-full border-8 border-gray-200 flex items-center justify-center mx-auto pulse-ring"
+                                 id="riskCircle">
+                                <span id="riskPercentage" class="text-2xl font-bold">0%</span>
+                            </div>
+                        </div>
+                        <div id="riskLevel" class="mt-4 text-xl font-semibold"></div>
+                    </div>
+
+                    <!-- Explanation -->
+                    <div id="explanation" class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h3 class="font-semibold text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle mr-2 text-blue-500"></i>
+                            Assessment Explanation
+                        </h3>
+                        <p id="explanationText" class="text-gray-600 text-sm"></p>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div id="recommendations" class="bg-blue-50 rounded-lg p-4">
+                        <h3 class="font-semibold text-blue-700 mb-2 flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-yellow-500"></i>
+                            Recommendations
+                        </h3>
+                        <ul id="recommendationsList" class="text-blue-600 text-sm list-disc list-inside space-y-1">
+                            <!-- Recommendations will be populated by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <!-- Feature Importance -->
+                    <div id="featureImportance" class="mt-6 hidden">
+                        <h3 class="font-semibold text-gray-700 mb-3 flex items-center">
+                            <i class="fas fa-chart-bar mr-2 text-purple-500"></i>
+                            Key Risk Factors
+                        </h3>
+                        <div id="importanceChart" class="space-y-2">
+                            <!-- Feature importance bars will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Welcome/Info Card -->
+                <div id="welcomeCard" class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-center">
+                        <i class="fas fa-heartbeat text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Welcome to Heart Disease Risk Predictor</h3>
+                        <p class="text-gray-600 mb-4">
+                            Fill out the health assessment form to get an AI-powered prediction of your heart disease risk.
+                        </p>
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                            <p class="text-sm text-green-700">
+                                <i class="fas fa-shield-alt mr-1"></i>
+                                This tool supports SDG 3: Ensuring healthy lives and promoting well-being for all.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">About This Project</h4>
+                    <p class="text-gray-300 text-sm">
+                        This AI-powered tool demonstrates how machine learning can contribute to Sustainable Development Goal 3 
+                        by enabling early detection and prevention of cardiovascular diseases.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Disclaimer</h4>
+                    <p class="text-gray-300 text-sm">
+                        This is a demonstration tool for educational purposes. Always consult healthcare professionals 
+                        for medical advice and diagnosis.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">SDG 3 Impact</h4>
+                    <p class="text-gray-300 text-sm">
+                        Supporting target 3.4: "By 2030, reduce by one third premature mortality from 
+                        non-communicable diseases through prevention and treatment."
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-gray-400 text-sm">
+                    &copy; 2024 AI for Sustainable Development - Heart Disease Risk Prediction
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+  
+<script>
+// Run this immediately to check for missing fields
+console.log("🔍 DIAGNOSTIC: Checking for form fields...");
+
+const requiredFields = [
+    'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 
+    'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal'
+];
+
+let missingFields = [];
+
+requiredFields.forEach(field => {
+    const element = document.getElementById(field);
+    if (!element) {
+        missingFields.push(field);
+        console.error(`❌ MISSING FIELD: ${field}`);
+    } else {
+        console.log(`✅ FOUND: ${field}`);
+    }
+});
+
+if (missingFields.length > 0) {
+    console.error(`🚨 TOTAL MISSING FIELDS: ${missingFields.length} - ${missingFields.join(', ')}`);
+    
+    // Show visual alert
+    const alertDiv = document.createElement('div');
+    alertDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ef4444;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    `;
+    alertDiv.innerHTML = `
+        <h3 style="margin: 0 0 10px 0;">🚨 Missing Form Fields</h3>
+        <p style="margin: 0;">Missing: <strong>${missingFields.join(', ')}</strong></p>
+        <p style="margin: 10px 0 0 0; font-size: 12px;">Check browser console for details</p>
+    `;
+    document.body.appendChild(alertDiv);
+    
+    // Remove alert after 10 seconds
+    setTimeout(() => alertDiv.remove(), 10000);
+} else {
+    console.log("🎉 ALL FORM FIELDS FOUND!");
+}
+
+// Test form submission separately
+console.log("🔍 Checking form submission...");
+const form = document.getElementById('predictionForm');
+if (form) {
+    console.log("✅ Form found");
+} else {
+    console.error("❌ Form not found - check if predictionForm ID exists");
+}
+</script>
+</body>
+</html>

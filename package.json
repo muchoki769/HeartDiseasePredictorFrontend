@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "This project addresses **SDG 3: Good Health and Well-being** by developing a machine learning model to predict cardiovascular disease risk. Early detection enables preventive healthcare interventions, reducing premature mortality from non-communicable diseases.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "tailwindcss -i ./input.css -o ./styles.css --watch",
+    "build-css-prod": "tailwindcss -i ./input.css -o ./styles.css --minify",
+    "dev": "npm run build-css",
+    "build": "npm run build-css-prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.14",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.1",
+    "live-server": "^1.2.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14"
+  }
+}
