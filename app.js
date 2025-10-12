@@ -1,6 +1,6 @@
 class HeartDiseasePredictor {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000';
+        this.apiBaseUrl = 'https://heartdiseasepredictorbackend.onrender.com';
         //  this.apiBaseUrl = window.location.hostname === 'localhost' 
         //     ? 'http://localhost:5000' 
         //     : 'https://your-app-name.onrender.com'; 

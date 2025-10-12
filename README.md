@@ -7,8 +7,8 @@ This project addresses **SDG 3: Good Health and Well-being** by developing a mac
 
 ![Heart Disease Risk Prediction](public/HeartDiseaseRiskPredictor.PNG)
 
-- **Frontend Application**: []
-- **Backend API**: []
+- **Frontend Application**: [https://heartdiseasepredictorfrontend.onrender.com]
+- **Backend API**: [https://heartdiseasepredictorbackend.onrender.com]
 - **API Documentation**: `/health`, `/features`, `/predict`
 
 ## 📊 Presentation
